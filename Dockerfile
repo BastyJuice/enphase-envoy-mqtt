@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir \
 
 # Copy application scripts into the container
 COPY run.sh /
-COPY envoy_to_mqtt_json.py /
+COPY envoy_to_mqtt.py /
 
 # Ensure the main script has execute permissions
 RUN chmod +x /run.sh
