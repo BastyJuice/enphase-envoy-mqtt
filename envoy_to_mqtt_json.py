@@ -48,18 +48,18 @@ dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 # I use the Mosquito broker add-on but you can use an external one if needed
 # python
 
-MQTT_HOST = option_dict["MQTT_HOST"]  # Note - if issues connecting, use FQDN for broker IP instead of hassio.local
+MQTT_HOST = option_dict["MQTT_HOST"]  # Note - if issues connecting, use FQDN for broker IP instead of device.local
 MQTT_PORT = option_dict["MQTT_PORT"]
 MQTT_TOPIC = option_dict["MQTT_TOPIC"]  # Note - if you change this topic, you'll need to also change the value_templates in configuration.yaml
+MQTT_TOPIC_FREEDS = "Envoy/Inverter/GridWatts"
 MQTT_USER = option_dict["MQTT_USER"]     # As described in the Documentation for the Mosquito broker add-on, the MQTT user/password are the user setup for mqtt
 MQTT_PASSWORD = option_dict["MQTT_PASSWORD"]    # If you use an external broker, use those details instead
 ENVOY_HOST = option_dict["ENVOY_HOST"]  # ** Enter envoy-s IP. Note - use FQDN and not envoy.local if issues connecting 
-ENVOY_USER= option_dict["ENVOY_USER"]
-ENVOY_USER_PASS= option_dict["ENVOY_USER_PASS"]
-USE_FREEDS= option_dict["USE_FREEDS"]
-BATTERY_INSTALLED= option_dict["BATTERY_INSTALLED"]
+ENVOY_USER = option_dict["ENVOY_USER"]
+ENVOY_USER_PASS = option_dict["ENVOY_USER_PASS"]
+USE_FREEDS = option_dict["USE_FREEDS"]
+BATTERY_INSTALLED = option_dict["BATTERY_INSTALLED"]
 DEBUG= option_dict["DEBUG"]
-MQTT_TOPIC_FREEDS = "Inverter/GridWatts"
 ####  End Settings - no changes after this line
 
 #Password generator
