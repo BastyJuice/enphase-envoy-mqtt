@@ -1,6 +1,8 @@
+This is a Fork from vk2him "https://github.com/vk2him/Enphase-Envoy-mqtt-json/" but with direct docker compose Support for AMD64 Platforms. The Goal is to Use it with every MQTT Server like Loxberry not only with HA
+
 # Python script: `Enphase Envoy mqtt to json`
 
-A Python script that takes a real time json stream from an Enphase Envoy and publishes to a mqtt broker. This can then be used within Home Assistant or for other applications. The data updates at least once per second with negligible load on the Envoy.
+A Python script that takes a real time json stream from an Enphase Envoy and publishes to a mqtt broker. This can then be used for SmartHome Software applications. The data updates at least once per second with negligible load on the Envoy.
 
 Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 
@@ -20,7 +22,6 @@ Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 ```
 services:
   enphase-envoy-mqtt:
-    platform: linux/arm64/v8
     container_name: enphase-envoy-mqtt
     image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:main
     network_mode: bridge
@@ -559,3 +560,7 @@ The resulting mqtt topic should look like this example:
     }
 ]'
 ```
+## Donation
+If this project helps you, you can give me a cup of coffee<br/>
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/bastyjuice)
+<br/><br/>
