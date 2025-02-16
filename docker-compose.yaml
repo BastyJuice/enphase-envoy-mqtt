@@ -1,0 +1,10 @@
+services:
+  enphase-envoy-mqtt:
+    container_name: enphase-envoy-mqtt
+    image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:latest
+    network_mode: bridge
+    restart: unless-stopped
+    volumes:
+      - ./options.json:/data/options.json:rw
+    environment:
+      - TZ=Europe/Berlin
