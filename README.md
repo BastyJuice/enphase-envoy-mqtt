@@ -23,7 +23,7 @@ Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 services:
   enphase-envoy-mqtt:
     container_name: enphase-envoy-mqtt
-    image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:main
+    image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:latest
     network_mode: bridge
     restart: unless-stopped
     volumes:
