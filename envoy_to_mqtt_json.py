@@ -390,10 +390,10 @@ def scrape_stream_meters():
 
 def scrape_stream():
     serial = serialNumber.encode("utf-8")
-    ENVOY_PASSWORD=emupwGetMobilePasswd(serial, userName)
-    print(dt_string, 'Envoy password is', ENVOY_PASSWORD)
+    ENVOY_SERIAL=emupwGetMobilePasswd(serial, userName)
+    print(dt_string, 'Envoy password is', ENVOY_SERIAL)
     if DEBUG: print(dt_string, 'Username:',userName.decode())
-    auth = HTTPDigestAuth(userName.decode(), ENVOY_PASSWORD)
+    auth = HTTPDigestAuth(userName.decode(), ENVOY_SERIAL)
     if DEBUG: print(dt_string, 'auth:',auth)
     marker = b'data: '
     while True:
