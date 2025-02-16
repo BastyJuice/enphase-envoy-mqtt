@@ -1,4 +1,4 @@
-# Python script: `Enphase Envoy mqtt json for Home Assistant`
+# Python script: `Enphase Envoy mqtt to json`
 
 A Python script that takes a real time json stream from an Enphase Envoy and publishes to a mqtt broker. This can then be used within Home Assistant or for other applications. The data updates at least once per second with negligible load on the Envoy.
 
@@ -32,45 +32,6 @@ services:
         max-size: "10m" # file size in megabytes
 ```
 We sure to have valid values for options.json
-
-
-
-
-# Installation Method 1 - as a Home Assistant addon. ###
-
-1) Add this Repository to your Home Assistant by clicking this button  
-
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/vk2him/Enphase-Envoy-mqtt-json)
-
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
-![Supports armhf Architecture][armhf-shield]
-![Supports armv7 Architecture][armv7-shield]
-![Supports i386 Architecture][i386-shield]
-
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
-
-2) After adding the Repository, you'll see a new section titled "vk2him's Enphase add-on repository"
-3) Click to install "Stream mqtt from Enphase Envoy"
-4) After it's installed, click on "Configuration" and enter required settings __Note:__ "MQTT_HOST" will be the IP address for your mqtt broker, so this will probably be the IP address of your Home Assistant
-5) Optionally slide switch to enable Watchdog and/or Auto update
-6) Click on the "Logs" tab, you should now see output similar to this:
-
-            [s6-init] making user provided files available at /var/run/s6/etc...exited 0.
-            [s6-init] ensuring user provided files have correct perms...exited 0.
-            [fix-attrs.d] applying ownership & permissions fixes...
-            [fix-attrs.d] done.
-            [cont-init.d] executing container initialization scripts...
-            [cont-init.d] done.
-            [services.d] starting services
-            [services.d] done.
-            06/04/2022 16:52:14  Connected to 192.168.1.74:1883
-            /envoy/json
-7) mqtt steam will now be sent to your broker
 
 ## `configuration.yaml` configuration examples For FW 5
 ```yaml
@@ -332,129 +293,6 @@ sensor:
         value_template: "{{ states('sensor.mqtt_production')}}"
         unit_of_measurement: "W"
         icon_template: mdi:flash
-```
-
-# Installation Method 2 - as a stand-alone install on a Linux host
-
-- Copy to you Linux host in the directory of your choosing 
-`git clone https://github.com/vk2him/Enphase-Envoy-mqtt-json`
-- Configure settings in `/data/options.json`
-
-__Note:__
-
-  - You need to install `paho.mqtt` :- 
-```
-    pip install paho-mqtt
-```
-- If that doesn't work, try
-```
-git clone https://github.com/eclipse/paho.mqtt.python
-cd paho.mqtt.python
-python setup.py install
-```
-
-## To manually run Script
-```
-/path/to/python3 /path/to/envoy_to_mqtt_json.py
-```
-
-## Run automatically as a systemd service on Linux Mint,Ubuntu, etc
-
-Note: this should work for any linux distribution that uses systemd services, but the instructions and locations may vary slightly.
-
-Take note of where your python file has been saved as you need to point to it in the service file
-
-```
-/path/to/envoy_to_mqtt_json.py
-```
-
-Using a bash terminal
-
-```
-cd /etc/systemd/system
-```
-
-Create a file called envoy.service with your favourite file editor and add the following (alter User/Group to suit). 
-
-```
-
-[Unit]
-Description=Envoy stream to MQTT
-Documentation=https://github.com/vk2him/Enphase-Envoy-mqtt-json
-After=network.target mosquitto.service
-StartLimitIntervalSec=0
-
-[Service]
-Type=simple
-User=youruserid
-Group=yourgroupid
-ExecStart=/path/to/python3 /path/to/envoy_to_mqtt_json.py
-Environment=PYTHONUNBUFFERED=true
-Restart=always
-RestartSec=5
-SyslogIdentifier=envoy
-StandardError=journal
-
-[Install]
-WantedBy=multi-user.target
-
-```
-
-Save and close the file then run the following commands
-
-```
-sudo systemctl daemon-reload
-```
-```
-sudo systemctl enable envoy.service
-```
-```
-sudo systemctl start envoy.service
-```
-You can check the status of the service at any time by the command
-```
-systemctl status envoy
-```
-
-## Run automatically on macOs as a LaunchAgent
-
- - an example for `macOs` is to create a `~/Library/LaunchAgents/envoy.plist`
-
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>Disabled</key>
-	<false/>
-	<key>EnvironmentVariables</key>
-	<dict>
-		<key>PATH</key>
-		<string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/sbin</string>
-	</dict>
-	<key>KeepAlive</key>
-	<true/>
-	<key>Label</key>
-	<string>envoy</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/path/to/python3</string>
-		<string>/path/to/envoy_to_mqtt_json.py</string>
-	</array>
-	<key>RunAtLoad</key>
-	<true/>
-</dict>
-</plist>
-```
-Then use `launchctl` to load the plist from a terminal:
-```
-launchctl load ~/Library/LaunchAgents/envoy.plist
-```
-
-To stop it running use
-
-```
-launchctl unload ~/Library/LaunchAgents/envoy.plist
 ```
 
 # Example output for FW 5
@@ -719,8 +557,3 @@ The resulting mqtt topic should look like this example:
     }
 ]'
 ```
-## Donation
-If this project helps you, you can give me a cup of coffee<br/>
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/vk2him)
-<br/><br/>
-
