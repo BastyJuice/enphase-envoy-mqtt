@@ -15,6 +15,27 @@ Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 - A mqtt broker that is already running - this can be external or use the `Mosquitto broker` from the Home Assistant Add-on store
     - If you use the HA broker add-on, create a Home Assistant user/password for mqtt as described in the `Mosquitto broker` installation instructions
 
+# Installation with docker compose
+
+```
+services:
+  envoy-mqtt-json:
+    image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:main
+    container_name: envoy-mqtt-json
+    restart: unless-stopped
+    volumes:
+      - ./options.json:/data/options.json
+    logging:
+      driver: "json-file"
+      options: 
+        max-file: "5"   # number of files or file count
+        max-size: "10m" # file size in megabytes
+```
+We sure to have valid values for options.json
+
+
+
+
 # Installation Method 1 - as a Home Assistant addon. ###
 
 1) Add this Repository to your Home Assistant by clicking this button  
