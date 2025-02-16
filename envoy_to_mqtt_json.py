@@ -46,13 +46,13 @@ dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 #
 ##### Settings Start here
 #
-# I use the Home Assistant Mosquito broker add-on but you can use an external one if needed
+# I use the Mosquito broker add-on but you can use an external one if needed
 # python
 
 MQTT_HOST = option_dict["MQTT_HOST"]  # Note - if issues connecting, use FQDN for broker IP instead of hassio.local
 MQTT_PORT = option_dict["MQTT_PORT"]
 MQTT_TOPIC = option_dict["MQTT_TOPIC"]  # Note - if you change this topic, you'll need to also change the value_templates in configuration.yaml
-MQTT_USER = option_dict["MQTT_USER"]     # As described in the Documentation for the HA Mosquito broker add-on, the MQTT user/password are the user setup for mqtt
+MQTT_USER = option_dict["MQTT_USER"]     # As described in the Documentation for the Mosquito broker add-on, the MQTT user/password are the user setup for mqtt
 MQTT_PASSWORD = option_dict["MQTT_PASSWORD"]    # If you use an external broker, use those details instead
 ENVOY_HOST = option_dict["ENVOY_HOST"]  # ** Enter envoy-s IP. Note - use FQDN and not envoy.local if issues connecting 
 ENVOY_USER= option_dict["ENVOY_USER"]
