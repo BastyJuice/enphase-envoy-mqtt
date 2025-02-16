@@ -27,12 +27,7 @@ services:
     network_mode: bridge
     restart: unless-stopped
     volumes:
-      - ./options.json:/data/options.json
-    logging:
-      driver: "json-file"
-      options: 
-        max-file: "5"   # number of files or file count
-        max-size: "10m" # file size in megabytes
+      - ./options.json:/data/options.json:rw
 ```
 Be sure you have the valid values in your options.json
 
