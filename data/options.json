@@ -7,8 +7,8 @@
   "ENVOY_USER": "YOUR_ENVOY_HOST_USER",
   "ENVOY_USER_PASS": "YOUR_ENVOY_HOST_USER",
   "ENVOY_SERIAL": "YOUR_ENVOY_SERIAL_NR",
-  "USE_FREEDS": "False",
-  "MQTT_TOPIC": "Envoy/json",
+  "MQTT_TOPIC": "Envoy/Data",
+  "USE_FREEDS": "true",
   "MQTT_TOPIC_FREEDS": "Envoy/Inverter/GridWatts",
   "BATTERY_INSTALLED": "False",
   "DEBUG": "False"
