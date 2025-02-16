@@ -59,7 +59,7 @@ ENVOY_USER = option_dict["ENVOY_USER"]
 ENVOY_USER_PASS = option_dict["ENVOY_USER_PASS"]
 USE_FREEDS = option_dict["USE_FREEDS"]
 BATTERY_INSTALLED = option_dict["BATTERY_INSTALLED"]
-DEBUG= option_dict["DEBUG"]
+DEBUG = option_dict["DEBUG"]
 ####  End Settings - no changes after this line
 
 #Password generator
