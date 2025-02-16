@@ -33,7 +33,7 @@ services:
         max-file: "5"   # number of files or file count
         max-size: "10m" # file size in megabytes
 ```
-We sure to have valid values for options.json
+Be sure you have the valid values in your options.json
 
 ## `configuration.yaml` configuration examples For FW 5
 ```yaml
