@@ -26,7 +26,7 @@ import xml.etree.ElementTree as ET
 #disable warnings of self signed certificate https
 urllib3.disable_warnings()
 import paho.mqtt.client as mqtt
-client = mqtt.Client()
+client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 pp = pprint.PrettyPrinter()
 import xml.etree.ElementTree as ET
 import hashlib
@@ -218,12 +218,12 @@ def on_disconnect(client, userdata, rc) :
 def on_log(client, userdata, level, buf) :
     print("{0}".format(buf))
 
-client               = mqtt.Client()
-client.on_connect    = on_connect
-#client.on_publish    = on_publish
+client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+client.on_connect = on_connect
+#client.on_publish = on_publish
 client.on_disconnect = on_disconnect
 # Uncomment to enable debug messages
-#client.on_log       = on_log
+#client.on_log = on_log
 client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 if DEBUG: print(dt_string, 'Will wait for mqtt connect')
 wait: client.connect(MQTT_HOST,int(MQTT_PORT), 30)
