@@ -10,6 +10,6 @@
   "MQTT_TOPIC": "Envoy/Data",
   "USE_FREEDS": "true",
   "MQTT_TOPIC_FREEDS": "Envoy/Inverter/GridWatts",
-  "BATTERY_INSTALLED": "False",
-  "DEBUG": "False"
+  "BATTERY_INSTALLED": "false",
+  "DEBUG": "false"
   }
