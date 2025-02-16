@@ -32,7 +32,7 @@ services:
     environment:
       - TZ=Europe/Berlin
 ```
-Be sure you have the valid values in your options.json
+Be sure you have the valid values in your options.json and a empty token.txt
 
 ## `configuration.yaml` configuration examples For FW 5
 ```yaml
