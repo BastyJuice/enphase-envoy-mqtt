@@ -199,7 +199,7 @@ def on_connect(client, userdata, flags, reason_code, properties=None):
 def on_publish(client, userdata, mid) :
     print("mid: {0}".format(str(mid)))
 
-def on_disconnect(client, userdata, rc, properties=None):
+def on_disconnect(client, userdata, rc, properties=None, reason_code=None):
     """
     Handle disconnection from the broker.
     """
@@ -207,6 +207,8 @@ def on_disconnect(client, userdata, rc, properties=None):
     print("Client:", str(client))
     print("Userdata:", str(userdata))
     print("Result code:", str(rc))
+    if reason_code is not None:
+        print("Reason code:", str(reason_code))
 
 def on_log(client, userdata, level, buf) :
     print("{0}".format(buf))
