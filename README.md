@@ -28,6 +28,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./options.json:/data/options.json:rw
+      - ./token.txt:/data/token.txt:rw
+    environment:
+      - TZ=Europe/Berlin
 ```
 Be sure you have the valid values in your options.json
 
