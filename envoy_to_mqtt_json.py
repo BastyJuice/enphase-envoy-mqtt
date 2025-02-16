@@ -6,13 +6,11 @@
 # Version 1.1 7th November 2021 - Include date/time to output for checking 
 # Version 1.2 6th April 2022 - tidy up some comments
 # Version 1.3 7th April 2022 - converted to work as a Home Assistant Addon
-# 
-#Version 1.4 17th July 2023 - converted to work with V7 firmware by https://github.com/helderfmf
+# Version 1.4 17th July 2023 - converted to work with V7 firmware by https://github.com/helderfmf
+# Version 1.5 16th Febuary 2025 - Bugfixes and Adjustments for Loxbery and work without HA 
 #
-# Ian Mills
-# vk2him@gmail.com
+# Forked by BastyJuice from Ian Mills vk2him@gmail.com
 #
-
 
 import json
 import urllib3
@@ -23,6 +21,7 @@ import pprint
 from datetime import datetime
 import time
 import xml.etree.ElementTree as ET
+
 #disable warnings of self signed certificate https
 urllib3.disable_warnings()
 import paho.mqtt.client as mqtt
