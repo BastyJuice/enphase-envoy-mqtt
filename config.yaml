@@ -14,7 +14,7 @@ options:
   MQTT_USER: mqtt.user
   MQTT_PASSWORD: mqtt.password
   MQTT_PORT: 1883
-  MQTT_TOPIC: /envoy/json
+  MQTT_TOPIC: Envoy/Data
   ENVOY_HOST: envoy.local
   ENVOY_USER: enter.enphase.userid@email.com
   ENVOY_USER_PASS: enter.enphase.password
