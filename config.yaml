@@ -10,7 +10,7 @@ arch:
   - armv7
   - i386
 options:
-  MQTT_HOST: ip.address.of.homeasistant
+  MQTT_HOST: ip.address.of.loxberry
   MQTT_USER: mqtt.user
   MQTT_PASSWORD: mqtt.password
   MQTT_PORT: 1883
