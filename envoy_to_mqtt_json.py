@@ -175,36 +175,27 @@ if envoy_version != 5:
     #4: Refused – bad user name or password (MQTT v3.1 broker only)
     #5: Refused – not authorised (MQTT v3.1 broker only
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, reason_code, properties=None):
     """
     Handle connections (or failures) to the broker.
-    This is called after the client has received a CONNACK message
-    from the broker in response to calling connect().
-    The parameter rc is an integer giving the return code:
-    0: Success
-    1: Refused . unacceptable protocol version
-    2: Refused . identifier rejected
-    3: Refused . server unavailable
-    4: Refused . bad user name or password (MQTT v3.1 broker only)
-    5: Refused . not authorised (MQTT v3.1 broker only)
+    This is called after the client has received a CONNACK message.
     """
-    if rc == 0:
-        print(dt_string,"Connected to %s:%s" % (MQTT_HOST, MQTT_PORT))
-        # Subscribe to our incoming topic
+    if reason_code == 0:
+        print(dt_string, "Connected to %s:%s" % (MQTT_HOST, MQTT_PORT))
         client.subscribe(MQTT_TOPIC)
-        print(dt_string,'Subscribed to MQTT_TOPIC:', "{0}".format(MQTT_TOPIC))
-    elif rc == 1:
-        print(dt_string," Connection refused - unacceptable protocol version")
-    elif rc == 2:
-        print(dt_string," Connection refused - identifier rejected")
-    elif rc == 3:
-        print(dt_string," Connection refused - server unavailable")
-    elif rc == 4:
-        print(dt_string," Connection refused - bad user name or password")
-    elif rc == 5:
-        print(dt_string," Connection refused - not authorised")
+        print(dt_string, "Subscribed to MQTT_TOPIC:", "{0}".format(MQTT_TOPIC))
+    elif reason_code == 1:
+        print(dt_string, "Connection refused - unacceptable protocol version")
+    elif reason_code == 2:
+        print(dt_string, "Connection refused - identifier rejected")
+    elif reason_code == 3:
+        print(dt_string, "Connection refused - server unavailable")
+    elif reason_code == 4:
+        print(dt_string, "Connection refused - bad user name or password")
+    elif reason_code == 5:
+        print(dt_string, "Connection refused - not authorised")
     else:
-        print(dt_string," Connection failed - result code %d" % (rc))
+        print(dt_string, "Connection failed - result code %d" % (reason_code))
 
 def on_publish(client, userdata, mid) :
     print("mid: {0}".format(str(mid)))
