@@ -42,7 +42,7 @@ Be sure you have the valid values in your options.json and a empty token.txt
 #
 sensor:
   - platform: mqtt
-    state_topic: "/envoy/json"
+    state_topic: "Envoy/Data"
     name: "mqtt_production"
     qos: 0
     unit_of_measurement: "W"
@@ -51,7 +51,7 @@ sensor:
     device_class: power
 
   - platform: mqtt
-    state_topic: "/envoy/json"
+    state_topic: "Envoy/Data"
     value_template: '{{ value_json["total-consumption"]["ph-a"]["p"] }}'
     name: "mqtt_consumption"
     qos: 0
@@ -60,7 +60,7 @@ sensor:
     device_class: power
 
   - platform: mqtt
-    state_topic: "/envoy/json"
+    state_topic: "Envoy/Data"
     name: "mqtt_power_factor"
     qos: 0
     unit_of_measurement: "%"
@@ -69,7 +69,7 @@ sensor:
     device_class: power_factor
 
   - platform: mqtt
-    state_topic: "/envoy/json"
+    state_topic: "Envoy/Data"
     name: "mqtt_voltage"
     qos: 0
     unit_of_measurement: "V"
@@ -83,7 +83,7 @@ sensor:
 mqtt:
   sensor:
     - name: envoy mqtt consumption
-      state_topic: "/envoy/json"
+      state_topic: "Envoy/Data"
       value_template: '{{ value_json[1]["activePower"] | round(0) | int(0)}}'
       unique_id: envoy_mqtt_consumption
       qos: 0
@@ -91,7 +91,7 @@ mqtt:
       state_class: measurement
       device_class: power
     - name: envoy mqtt voltage
-      state_topic: "/envoy/json"
+      state_topic: "Envoy/Data"
       value_template: '{{ value_json[1]["voltage"] | round(0) | int(0)}}'
       unique_id: envoy_mqtt_voltage
       qos: 0
@@ -99,7 +99,7 @@ mqtt:
       state_class: measurement
       device_class: voltage
     - name: envoy mqtt current
-      state_topic: "/envoy/json"
+      state_topic: "Envoy/Data"
       value_template: '{{ value_json[1]["current"] | round(2)}}'
       unique_id: envoy_mqtt_current
       qos: 0
@@ -107,7 +107,7 @@ mqtt:
       state_class: measurement
       device_class: current
     - name: envoy mqtt power factor
-      state_topic: "/envoy/json"
+      state_topic: "Envoy/Data"
       value_template: '{{ value_json[1]["pwrFactor"] | round(2)}}'
       unique_id: envoy_mqtt_power_factor
       qos: 0
@@ -121,7 +121,7 @@ mqtt:
 mqtt:
   sensor:
     - name: envoy mqtt consumption
-      state_topic: "/envoy/json"
+      state_topic: "Envoy/Data"
       value_template: '{{ value_json["meters"]["grid"]["agg_p_mw"]/1000 | round(0) | int(0) }}'
       unique_id: envoy_mqtt_consumption
       qos: 0
