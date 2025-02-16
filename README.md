@@ -19,9 +19,11 @@ Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 
 ```
 services:
-  envoy-mqtt-json:
+  enphase-envoy-mqtt:
+    platform: linux/arm64/v8
+    container_name: enphase-envoy-mqtt
     image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:main
-    container_name: envoy-mqtt-json
+    network_mode: bridge
     restart: unless-stopped
     volumes:
       - ./options.json:/data/options.json
