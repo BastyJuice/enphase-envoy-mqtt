@@ -1,14 +1,14 @@
 {
-  "MQTT_HOST": "ip.address.of.homeasistant",
-  "MQTT_USER": "mqtt.user",
-  "MQTT_PASSWORD": "mqtt.password",
+  "MQTT_HOST": "YOUR_LOXBERRY_IP",
+  "MQTT_USER": "YOUR_LOXBERRY_MQTT_USER",
+  "MQTT_PASSWORD": "YOUR_LOXBERRY_MQTT_PASS",
   "MQTT_PORT": "1883",
-  "ENVOY_HOST": "envoy.local",
-  "ENVOY_USER": "secret",
-  "ENVOY_PASSWORD": "secret",
-  "ENVOY_USER_PASS": "secret",
+  "ENVOY_HOST": "YOUR_ENVOY_HOST_IP",
+  "ENVOY_USER": "YOUR_ENVOY_HOST_USER",
+  "ENVOY_USER_PASS": "YOUR_ENVOY_HOST_USER",
+  "ENVOY_SERIAL": "YOUR_ENVOY_SERIAL_NR",
   "USE_FREEDS": "False",
   "MQTT_TOPIC": "/envoy/json",
-  "DEBUG": "False",
-  "BATTERY_INSTALLED": "False"
+  "BATTERY_INSTALLED": "False",
+  "DEBUG": "False"
   }
