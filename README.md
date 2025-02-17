@@ -559,6 +559,7 @@ The resulting mqtt topic should look like this example:
 ]'
 ```
 ## Donation
+<br/>
 If this project helps you, you can give me a cup of coffee<br/>
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/bastyjuice)
 <br/><br/>
