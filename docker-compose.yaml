@@ -1,7 +1,7 @@
 services:
   enphase-envoy-mqtt:
     container_name: enphase-envoy-mqtt
-    image: ghcr.io/bastyjuice/enphase-envoy-mqtt-json:latest
+    image: ghcr.io/bastyjuice/enphase-envoy-mqtt:latest
     network_mode: bridge
     restart: unless-stopped
     volumes:
