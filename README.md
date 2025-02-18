@@ -1,4 +1,4 @@
-This is a Fork from vk2him "https://github.com/vk2him/Enphase-Envoy-mqtt-json/" but with direct docker compose Support for amd64 Platforms. The Goal is to use it with every MQTT Server like Loxberry not only with HA. This Image runs on a Synology with amd64 CPU.
+This is a Fork from vk2him "https://github.com/vk2him/Enphase-Envoy-mqtt-json/" Script. This Script Fork has some Bugfixes for reconection issues, rewritten options file, some deprecated functions was updated. The Goal is to run this Script in Docker and work with a Loxberry. This Build runs like a charme with Docker Compose on a Synology with amd64 in Container Manager or Portainer.
 
 # Python script: `Enphase Envoy mqtt to json`
 
