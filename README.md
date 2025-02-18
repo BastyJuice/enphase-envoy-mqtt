@@ -14,8 +14,8 @@ Now works with 7.x.x and 8.x.x firmware - thanks to @helderd
 
 - An Enphase Envoy running 5.x.x, 7.x.x or 8.x.x firmware.
 - For 7.x.x and 8.x.x a token is automatically downloaded from Enphase every time the addon is started, so you must include your Enphase account username and password in configutaion
-- A mqtt broker that is already running - this can be external or use the `Mosquitto broker` from the Home Assistant Add-on store
-    - If you use the HA broker add-on, create a Home Assistant user/password for mqtt as described in the `Mosquitto broker` installation instructions
+- A mqtt broker that is already running - this can be external or use the `Mosquitto broker` from the Loxberry
+    - If you use the Loxberry MQTT Gateway, us the user/password for mqtt as described in the LoxBerry Wiki https://wiki.loxberry.de/plugins/mqtt_gateway/start
 
 # Installation with docker compose
 
