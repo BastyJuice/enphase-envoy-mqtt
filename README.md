@@ -34,117 +34,27 @@ services:
 ```
 Be sure you have the valid values in your options.json and a empty token.txt
 
-## `configuration.yaml` configuration examples For FW 5
-```yaml
-# Example configuration.yaml entry
-#
-# Creates sensors with names such as sensor.mqtt_production
-#
-sensor:
-  - platform: mqtt
-    state_topic: "Envoy/Data"
-    name: "mqtt_production"
-    qos: 0
-    unit_of_measurement: "W"
-    value_template: '{% if is_state("sun.sun", "below_horizon")%}0{%else%}{{ value_json["production"]["ph-a"]["p"]  | int(0) }}{%endif%}'
-    state_class: measurement
-    device_class: power
+## Description of labels 
+- more info here "https://www.greenwoodsolutions.com.au/news-posts/real-apparent-reactive-power"
 
-  - platform: mqtt
-    state_topic: "Envoy/Data"
-    value_template: '{{ value_json["total-consumption"]["ph-a"]["p"] }}'
-    name: "mqtt_consumption"
-    qos: 0
-    unit_of_measurement: "W"
-    state_class: measurement
-    device_class: power
-
-  - platform: mqtt
-    state_topic: "Envoy/Data"
-    name: "mqtt_power_factor"
-    qos: 0
-    unit_of_measurement: "%"
-    value_template: '{{ value_json["total-consumption"]["ph-a"]["pf"] }}'
-    state_class: measurement
-    device_class: power_factor
-
-  - platform: mqtt
-    state_topic: "Envoy/Data"
-    name: "mqtt_voltage"
-    qos: 0
-    unit_of_measurement: "V"
-    value_template: '{{ value_json["total-consumption"]["ph-a"]["v"] }}'
-    state_class: measurement
-    device_class: voltage
-#
 ```
-## `configuration.yaml` configuration examples For FW 7 and FW 8
-```yaml
-mqtt:
-  sensor:
-    - name: envoy mqtt consumption
-      state_topic: "Envoy/Data"
-      value_template: '{{ value_json[1]["activePower"] | round(0) | int(0)}}'
-      unique_id: envoy_mqtt_consumption
-      qos: 0
-      unit_of_measurement: "W"
-      state_class: measurement
-      device_class: power
-    - name: envoy mqtt voltage
-      state_topic: "Envoy/Data"
-      value_template: '{{ value_json[1]["voltage"] | round(0) | int(0)}}'
-      unique_id: envoy_mqtt_voltage
-      qos: 0
-      unit_of_measurement: "V"
-      state_class: measurement
-      device_class: voltage
-    - name: envoy mqtt current
-      state_topic: "Envoy/Data"
-      value_template: '{{ value_json[1]["current"] | round(2)}}'
-      unique_id: envoy_mqtt_current
-      qos: 0
-      unit_of_measurement: "A"
-      state_class: measurement
-      device_class: current
-    - name: envoy mqtt power factor
-      state_topic: "Envoy/Data"
-      value_template: '{{ value_json[1]["pwrFactor"] | round(2)}}'
-      unique_id: envoy_mqtt_power_factor
-      qos: 0
-      unit_of_measurement: "%"
-      state_class: measurement
-      device_class: power_factor
-```
+"production": = Solar panel production - always positive value
+"total-consumption": = Total Power consumed - always positive value
+"net-consumption": = Total power Consumed minus Solar panel production. Will be positive when importing and negative when exporting
+    
+    "ph-a" = Phase A    
+    "ph-b" = Phase B
+    "ph-c" = Phase C
 
-## `configuration.yaml` configuration examples For FW 8 (with batteries)
-```yaml
-mqtt:
-  sensor:
-    - name: envoy mqtt consumption
-      state_topic: "Envoy/Data"
-      value_template: '{{ value_json["meters"]["grid"]["agg_p_mw"]/1000 | round(0) | int(0) }}'
-      unique_id: envoy_mqtt_consumption
-      qos: 0
-      unit_of_measurement: "W"
-      state_class: measurement
-      device_class: power
-    - name: envoy mqtt production
-      state_topic: "/envoy/json"
-      value_template: '{{ value_json["meters"]["pv"]["agg_p_mw"]/1000 | round(0) | int(0) }}'
-      unique_id: envoy_mqtt_production
-      qos: 0
-      unit_of_measurement: "W"
-      state_class: measurement
-      device_class: power
-    - name: envoy mqtt battery
-      state_topic: "/envoy/json"
-      value_template: '{{ value_json["meters"]["storage"]["agg_p_mw"]/1000 | round(0) | int(0) }}'
-      unique_id: envoy_mqtt_battery
-      qos: 0
-      unit_of_measurement: "W"
-      state_class: measurement
-      device_class: power
-```
+        "p": =  Real Power ** This is the one to use
+        "q": =  Reactive Power
+        "s": =  Apparent Power
+        "v": =  Voltage
+        "i": =  Current
+        "pf": = Power Factor
+        "f": =  Frequency
+```          
+
 Available sensors (with example data):
 ```json
 {
@@ -215,85 +125,6 @@ Available sensors (with example data):
     },
 ...
 }
-```
-
-## `value_template` configuration examples for FW5
-```yaml
-value_template: '{{ value_json["total-consumption"]["ph-a"]["p"] }}' # Phase A Total power consumed by house
-value_template: '{{ value_json["net-consumption"]["ph-c"]["p"] }}'   # Phase C - Total Power imported or exported
-value_template: '{{ value_json["production"]["ph-b"]["v"] }}'   # Phase B - Voltage produced by panels
-value_template: '{{ value_json["production"]["ph-a"]["p"] | int + value_json["production"]["ph-b"]["p"] | int + value_json["production"]["ph-c"]["p"] | int }}'  # Adding all three Production phases
-
-```
-## `Templating examples` 
-
- View this thread for Additional templating examples https://github.com/vk2him/Enphase-Envoy-mqtt-json/issues/42
- 
-## Real time power display using Power Wheel Card
-
-Here's the code if you'd like real-time visualisations of your power usage like this:
-
-<img src="https://www.theshackbythebeach.com/Power-wheel-card.jpeg">
-
-Power Wheel card:
-
-```yaml
-active_arrow_color: '#FF0000'
-color_icons: true
-consuming_color: '#FF0000'
-grid_power_consumption_entity: sensor.importing
-grid_power_production_entity: sensor.exporting
-home_icon: mdi:home-outline
-icon_height: mdi:18px
-producing_colour: '#00FF00'
-solar_icon: mdi:solar-power
-solar_power_entity: sensor.solarpower
-title_power: ' '
-type: custom:power-wheel-card
-```
-configuration.yaml:
-
-```yaml
-sensor:
-  
-  #
-  # These ones are for Envoy via mqtt
-  #
-  - platform: mqtt
-    state_topic: "/envoy/json"
-    name: "mqtt_production"
-    qos: 0
-    unit_of_measurement: "W"
-    value_template: '{% if is_state("sun.sun", "below_horizon")%}0{%else%}{{ value_json["production"]["ph-a"]["p"]  | int(0) }}{%endif%}'
-    state_class: measurement
-    device_class: power
-
-  - platform: mqtt
-    state_topic: "/envoy/json"
-    value_template: '{{ value_json["total-consumption"]["ph-a"]["p"] }}'
-    name: "mqtt_consumption"
-    qos: 0
-    unit_of_measurement: "W"
-    state_class: measurement
-    device_class: power
-
-  - platform: template
-    sensors:
-      exporting:
-        friendly_name: "Current MQTT Energy Exporting"
-        value_template: "{{ [0, (states('sensor.mqtt_production') | int(0) - states('sensor.mqtt_consumption') | int(0))] | max }}"
-        unit_of_measurement: "W"
-        icon_template: mdi:flash
-      importing:
-        friendly_name: "Current MQTT Energy Importing"
-        value_template: "{{ [0, (states('sensor.mqtt_consumption') | int(0) - states('sensor.mqtt_production') | int(0))] | max }}"
-        unit_of_measurement: "W"
-        icon_template: mdi:flash
-      solarpower:
-        friendly_name: "Solar MQTT Power"
-        value_template: "{{ states('sensor.mqtt_production')}}"
-        unit_of_measurement: "W"
-        icon_template: mdi:flash
 ```
 
 # Example output for FW 5
@@ -392,26 +223,6 @@ The resulting mqtt topic should look like this example:
 
 __Note:__ Data is provided for three phases - unused phases have values of `0.0`
 
-## Description of labels 
-- more info here "https://www.greenwoodsolutions.com.au/news-posts/real-apparent-reactive-power"
-
-```
-"production": = Solar panel production - always positive value
-"total-consumption": = Total Power consumed - always positive value
-"net-consumption": = Total power Consumed minus Solar panel production. Will be positive when importing and negative when exporting
-    
-    "ph-a" = Phase A    
-    "ph-b" = Phase B
-    "ph-c" = Phase C
-
-        "p": =  Real Power ** This is the one to use
-        "q": =  Reactive Power
-        "s": =  Apparent Power
-        "v": =  Voltage
-        "i": =  Current
-        "pf": = Power Factor
-        "f": =  Frequency
-```          
 # Example output for FW 7 and FW 8
 The resulting mqtt topic should look like this example:
 ```
@@ -557,7 +368,8 @@ The resulting mqtt topic should look like this example:
         ]
     }
 ]'
-```
+```    
+
 ## Donation
 
 If this project helps you, you can give me a cup of coffee
