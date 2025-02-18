@@ -52,8 +52,7 @@ Be sure you have the valid values in your options.json and a empty token.txt
         "v": =  Voltage
         "i": =  Current
         "pf": = Power Factor
-        "f": =  Frequency
-```          
+        "f": =  Frequency       
 
 Available sensors (with example data):
 ```json
