@@ -54,7 +54,7 @@ Be sure you have the valid values in your options.json and a empty token.txt
         "pf": = Power Factor
         "f": =  Frequency       
 
-# Available sensors (with example data):
+Available sensors (with example data):
 ```json
 {
 ...
