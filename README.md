@@ -38,9 +38,9 @@ Be sure you have the valid values in your options.json and a empty token.txt
 - more info here "https://www.greenwoodsolutions.com.au/news-posts/real-apparent-reactive-power"
 
 ```
-"production": = Solar panel production - always positive value
-"total-consumption": = Total Power consumed - always positive value
-"net-consumption": = Total power Consumed minus Solar panel production. Will be positive when importing and negative when exporting
+"production":         = Solar panel production - always positive value
+"total-consumption":  = Total Power consumed - always positive value
+"net-consumption":    = Total power Consumed minus Solar panel production. Will be positive when importing and negative when exporting
     
     "ph-a" = Phase A    
     "ph-b" = Phase B
@@ -54,7 +54,7 @@ Be sure you have the valid values in your options.json and a empty token.txt
         "pf": = Power Factor
         "f": =  Frequency       
 
-Available sensors (with example data):
+# Available sensors (with example data):
 ```json
 {
 ...
