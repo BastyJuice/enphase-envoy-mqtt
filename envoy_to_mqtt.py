@@ -49,14 +49,14 @@ dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 # python
 
 MQTT_HOST = option_dict["MQTT_HOST"]  # Note - if issues connecting, use FQDN for broker IP instead of device.local
+MQTT_USER = option_dict["MQTT_USER"]     # As described in the Documentation for the Mosquito broker add-on, the MQTT user/password are the user setup for mqtt
+MQTT_PASS = option_dict["MQTT_PASS"]    # If you use an external broker, use those details instead
 MQTT_PORT = option_dict["MQTT_PORT"]
 MQTT_TOPIC = option_dict["MQTT_TOPIC"]  # Note - if you change this topic, you'll need to also change the value_templates in configuration.yaml
 MQTT_TOPIC_FREEDS = option_dict["MQTT_TOPIC_FREEDS"]
-MQTT_USER = option_dict["MQTT_USER"]     # As described in the Documentation for the Mosquito broker add-on, the MQTT user/password are the user setup for mqtt
-MQTT_PASSWORD = option_dict["MQTT_PASSWORD"]    # If you use an external broker, use those details instead
 ENVOY_HOST = option_dict["ENVOY_HOST"]  # ** Enter envoy-s IP. Note - use FQDN and not envoy.local if issues connecting 
-ENVOY_USER = option_dict["ENVOY_USER"]
-ENVOY_USER_PASS = option_dict["ENVOY_USER_PASS"]
+ENPHASE_USER = option_dict["ENPHASE_USER"]
+ENPHASE_PASS = option_dict["ENPHASE_PASS"]
 USE_FREEDS = option_dict["USE_FREEDS"]
 BATTERY_INSTALLED = option_dict["BATTERY_INSTALLED"]
 DEBUG = option_dict["DEBUG"]
@@ -124,7 +124,7 @@ else:
 def token_gen(token):
     if token is None or token=='':
         print(dt_string,'Generating new token')
-        data = {'user[email]': ENVOY_USER, 'user[password]': ENVOY_USER_PASS}
+        data = {'user[email]': ENPHASE_USER, 'user[password]': ENPHASE_PASS}
         if DEBUG: print(dt_string, 'Token data:', data)
         response = requests.post('https://enlighten.enphaseenergy.com/login/login.json?', data=data)
         if response.status_code != 200:
@@ -132,7 +132,7 @@ def token_gen(token):
         else:
             if DEBUG: print(dt_string, 'Token response', response.text)
             response_data = json.loads(response.text)
-            data = {'session_id': response_data['session_id'], 'serial_num': serialNumber, 'username': ENVOY_USER}
+            data = {'session_id': response_data['session_id'], 'serial_num': serialNumber, 'username': ENPHASE_USER}
             response = requests.post('https://entrez.enphaseenergy.com/tokens', json=data)
             if response.status_code != 200:
                 print(dt_string,'Failed connect to https://entrez.enphaseenergy.com/tokens to generate token part 2 got', response, ' using this info', data )
@@ -219,7 +219,7 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 # Uncomment to enable debug messages
 #client.on_log = on_log
-client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+client.username_pw_set(MQTT_USER, MQTT_PASS)
 if DEBUG: print(dt_string, 'Will wait for mqtt connect')
 wait: client.connect(MQTT_HOST,int(MQTT_PORT), 30)
 if DEBUG: print(dt_string, 'Finished waiting for mqtt connect')
